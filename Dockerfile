@@ -1,11 +1,11 @@
 FROM node:16 as base
-WORKDIR /app
+WORKDIR /application
 COPY package*.json .
 RUN npm ci && npm cache clean --force
 COPY . .
 
 FROM node:16 as prod
-WORKDIR /app
+WORKDIR /application
 COPY package*.json .
 RUN npm ci && npm cache clean --force
 COPY . .
@@ -14,7 +14,7 @@ EXPOSE 3000
 ENTRYPOINT ["node", ".output/server/index.mjs"]
 
 FROM node:16 as dev
-WORKDIR /app
+WORKDIR /application
 COPY package*.json .
 RUN npm ci
 COPY . .
